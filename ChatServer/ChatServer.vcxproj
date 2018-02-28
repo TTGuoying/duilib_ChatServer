@@ -136,11 +136,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="DBModule.cpp" />
+    <ClCompile Include="IOCPBase.cpp" />
     <ClCompile Include="Mian.cpp" />
+    <ClCompile Include="NetwordModule.cpp" />
+    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="ServerMainWnd.cpp" />
+    <ClCompile Include="SQLite.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Task.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="DBModule.h" />
+    <ClInclude Include="IOCPBase.h" />
+    <ClInclude Include="NetwordModule.h" />
+    <ClInclude Include="Protocol.h" />
+    <ClInclude Include="Server.h" />
+    <ClInclude Include="ServerMainWnd.h" />
+    <ClInclude Include="SQLite.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Task.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Bin\Skin\MainWnd.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

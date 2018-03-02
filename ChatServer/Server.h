@@ -2,8 +2,8 @@
 #include "stdafx.h"
 #include "NetwordModule.h"
 #include "DBModule.h"
-#include <queue>
 #include "ThreadPool.h"
+#include <queue>
 
 using std::queue;
 
@@ -18,12 +18,9 @@ public:
 	void DeInit();
 	BOOL Stop();
 
-	ThreadPool * threadPool;
+	ThreadPool *threadPool;
 	DBModule *db;
 	NetwordModule *network;
-private:
-	CRITICAL_SECTION csLock;
-	queue<RecvSendData *> queueRecvDatas;
 
 };
 

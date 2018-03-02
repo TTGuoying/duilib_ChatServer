@@ -4,13 +4,13 @@
 
 Server::Server()
 {
-	InitializeCriticalSection(&csLock);
+	
 }
 
 
 Server::~Server()
 {
-	DeleteCriticalSection(&csLock);
+	
 }
 
 BOOL Server::Start(CDuiString DBpath, UINT port)
@@ -20,11 +20,11 @@ BOOL Server::Start(CDuiString DBpath, UINT port)
 
 BOOL Server::Init()
 {
-	network = new NetwordModule;
+	network = new NetwordModule(this);
 	if (network == NULL || network->Start() == false)
 		return false;
-	network->SetSever(this);
-	db = new DBModule;
+	//network->SetSever(this);
+	db = new DBModule(this);
 	if (db == NULL || db->Init() == false)
 		return false;
 	threadPool = new ThreadPool;

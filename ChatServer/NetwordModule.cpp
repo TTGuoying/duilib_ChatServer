@@ -2,8 +2,9 @@
 #include "Server.h"
 #include "Task.h"
 
-NetwordModule::NetwordModule()
+NetwordModule::NetwordModule(Server *server)
 {
+	this->server = server;
 }
 
 
@@ -25,17 +26,10 @@ void NetwordModule::OnConnectionError(ULONG connectID, int error)
 
 void NetwordModule::OnRecvCompleted(RecvSendData *data)
 {
-	ProcessRecvDataParam *param = new ProcessRecvDataParam;
-	param->data = data;
-	param->server = server;
-	server->threadPool->QueueTaskItem(Task::ProcessRecvData, param);
+	server->threadPool->QueueTaskItem(Task::ProcessRecvData, (WPARAM)data, (LPARAM)server);
 }
 
 void NetwordModule::OnSendCompleted(ULONG connectID, ULONG dataID)
 {
 }
 
-void NetwordModule::SetSever(Server * server)
-{
-	this->server = server;
-}

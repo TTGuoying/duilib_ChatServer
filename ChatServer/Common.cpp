@@ -51,3 +51,39 @@ CDuiString GetCurrentTimeString()
 	return str;
 }
 
+
+char *WToA(LPCTSTR str)
+{
+	LPSTR pszOut = NULL;
+	if (str != NULL)
+	{
+		int len = wcslen(str);
+
+		len = WideCharToMultiByte(CP_ACP, 0, str, len, NULL, 0, 0, 0) + 2;
+		pszOut = new char[len];
+
+		if (pszOut)
+		{
+			memset(pszOut, 0x00, len);
+			WideCharToMultiByte(CP_ACP, 0, str, len, pszOut, len, 0, 0);
+		}
+	}
+	return pszOut;
+}
+
+LPWSTR AToW(const char* str)
+{
+	LPWSTR pszOut = NULL;
+	if (str != NULL)
+	{
+		int nOutputStrLen = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0) + 1;
+		pszOut = (LPWSTR)new char[nOutputStrLen];
+
+		if (pszOut)
+		{
+			ZeroMemory((void *)pszOut, nOutputStrLen);
+			MultiByteToWideChar(CP_ACP, 0, str, -1, pszOut, nOutputStrLen);;
+		}
+	}
+	return pszOut;
+}

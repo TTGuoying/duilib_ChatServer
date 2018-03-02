@@ -40,6 +40,8 @@ const char* WcharToUtf8(const wchar_t *pwStr);
 const wchar_t* Utf8ToWchar(const char *pStr);
 CDuiString GetInstancePath();
 CDuiString GetCurrentTimeString();
+char *WToA(LPCTSTR str);
+LPWSTR AToW(const char* str);
 
 enum IO_OPERATION_TYPE
 {
@@ -328,11 +330,4 @@ public:
 	size_t		bytes;
 	ULONG		sendDataID;
 	ULONG		connectID;
-};
-
-class Server;
-struct ProcessRecvDataParam
-{
-	Server *server;
-	RecvSendData *data;
 };

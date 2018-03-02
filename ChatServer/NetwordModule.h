@@ -5,7 +5,7 @@ class Server;
 class NetwordModule : public IOCPBase
 {
 public:
-	NetwordModule();
+	NetwordModule(Server *server);
 	~NetwordModule();
 
 public:
@@ -19,8 +19,6 @@ public:
 	virtual void OnRecvCompleted(RecvSendData *data);
 	// Ð´²Ù×÷Íê³É
 	virtual void OnSendCompleted(ULONG connectID, ULONG dataID);
-
-	void SetSever(Server *server);
 
 	Server *server;
 };

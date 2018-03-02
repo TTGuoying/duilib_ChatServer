@@ -5,8 +5,8 @@
 // 登录信息
 struct SignInParam
 {
-	LPCTSTR		account;
-	LPCTSTR		password;
+	CString		account;
+	CString		password;
 	ULONG		connectID;
 };
 
@@ -15,13 +15,13 @@ struct User
 {
 	ULONG		userID;
 	int			headerImg;
-	LPCTSTR		nickName;
+	CString		nickName;
 	int			sexulity;
-	LPCTSTR		account;
-	LPCTSTR		password;
-	LPCTSTR		signature;
-	LPCTSTR		area;
-	LPCTSTR		phone;
+	CString		account;
+	CString		password;
+	CString		signature;
+	CString		area;
+	CString		phone;
 	ULONG		connectID;
 };
 
@@ -38,8 +38,8 @@ struct Friend
 {
 	ULONG		userID;
 	ULONG		friendID;
-	LPCTSTR		remark;
-	LPCTSTR		addTime;
+	CString		remark;
+	CString		addTime;
 	ULONG		connectID;
 };
 
@@ -49,8 +49,8 @@ struct SingleChatRecord
 	ULONG		msgID;
 	ULONG		userID;
 	ULONG		friendID;
-	LPCTSTR		msgTime;
-	LPCTSTR		message;
+	CString		msgTime;
+	CString		message;
 	ULONG		connectID;
 };
 
@@ -65,7 +65,7 @@ struct SingleUnSendMsg
 struct Group
 {
 	ULONG		groupID;
-	LPCTSTR		groupName;
+	CString		groupName;
 	ULONG		ownerID;
 	int			numOfMember;
 	ULONG		connectID;
@@ -85,8 +85,8 @@ struct GroupChatRecord
 	ULONG		msgID;
 	ULONG		groupID;
 	ULONG		sendUserID;
-	LPCTSTR		msgTime;
-	LPCTSTR		message;
+	CString		msgTime;
+	CString		message;
 	ULONG		connectID;
 };
 
@@ -98,20 +98,27 @@ struct GroupUnSendMsg
 	ULONG		connectID;
 };
 
+class Server;
 class DBModule
 {
 public:
-	DBModule();
+	DBModule(Server *server);
 	~DBModule();
 
 	BOOL Init();
 	BOOL SignIn(SignInParam *param);
+	void SetSignInStatus(ULONG userID, BOOL online);
+	BOOL GetSignInStatus(ULONG userID);
 	BOOL SignUp(User *user);
+	BOOL GetFriends(ULONG userID, ULONG connectID);
+	User *GetUser(ULONG userID);
+	User *GetUser(CString account);
 
 
 	//数据库对象
 	SQLite sqliteQuery;
 	SQLite sqliteModify;
 	CRITICAL_SECTION csLock;
+	Server *server;
 };
 

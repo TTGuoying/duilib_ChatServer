@@ -18,10 +18,12 @@ void NetwordModule::OnConnectionEstablished(ULONG connectID)
 
 void NetwordModule::OnConnectionClosed(ULONG connectID)
 {
+	server->threadPool->QueueTaskItem(Task::SetOffLineStatus, (WPARAM)connectID, (LPARAM)server);
 }
 
 void NetwordModule::OnConnectionError(ULONG connectID, int error)
 {
+	server->threadPool->QueueTaskItem(Task::SetOffLineStatus, (WPARAM)connectID, (LPARAM)server);
 }
 
 void NetwordModule::OnRecvCompleted(RecvSendData *data)

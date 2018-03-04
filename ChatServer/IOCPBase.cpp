@@ -86,8 +86,7 @@ BOOL IOCPBase::SendData(RecvSendData *data)
 	memcpy_s(ioContext->wsaBuf.buf, 4096, data->buff, data->bytes);
 	ioContext->wsaBuf.len = data->bytes;
 	delete data;
-	PostSend(socketContext, ioContext);
-	return 0;
+	return PostSend(socketContext, ioContext);
 }
 
 wstring IOCPBase::GetLocalIP()

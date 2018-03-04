@@ -331,3 +331,11 @@ public:
 	ULONG		sendDataID;
 	ULONG		connectID;
 };
+
+struct SingleChatMsg
+{
+	ULONG from;
+	ULONG to;
+	CString msg;
+	CString time;
+};

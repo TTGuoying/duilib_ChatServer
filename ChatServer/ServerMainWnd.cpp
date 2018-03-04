@@ -44,7 +44,8 @@ LPCTSTR ServerMainWnd::GetWindowClassName() const
 void ServerMainWnd::InitWindow()
 {
 	lbTips = static_cast<CLabelUI *>(m_PaintManager.FindControl(L"Tips"));
-
+	if (server.Init())
+		ShowTip(L"开启服务器成功");
 }
 
 void ServerMainWnd::Notify(TNotifyUI & msg)
@@ -53,8 +54,7 @@ void ServerMainWnd::Notify(TNotifyUI & msg)
 	{
 		if (msg.pSender->GetName() == L"BtnOne")
 		{
-			if (server.Init())
-				ShowTip(L"开启服务器成功");
+			
 			return;
 		}
 		else if (msg.pSender->GetName() == L"BtnTwo")

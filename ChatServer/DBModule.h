@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "SQLite.h"
+#include "Common.h"
 
 // 登录信息
 struct SignInParam
@@ -106,18 +107,33 @@ public:
 	~DBModule();
 
 	BOOL Init();
+
+	// 登录 注册
 	BOOL SignIn(SignInParam *param);
-	void SetSignInStatus(ULONG userID, BOOL online);
+	void SetStatusOnline(ULONG userID, ULONG connectID);
+	void SetStatusOnline(ULONG connectID);
 	BOOL GetSignInStatus(ULONG userID);
 	BOOL SignUp(User *user);
+
+	// 获取ConnectID
+	ULONG GetConnectID(ULONG userID);
+
+	// 获取好友
 	BOOL GetFriends(ULONG userID, ULONG connectID);
 	User *GetUser(ULONG userID);
 	User *GetUser(CString account);
+	int GetFriendNum(ULONG userID);
 
+	// 好友请求
+	void InsertFriendRequest(ULONG userID, ULONG friendID, int toFriend, int friendHadle, int toUser);
+	void AgreeFriendRequest(ULONG userID, ULONG friendID);
+	void RefusetFriendRequest(ULONG userID, ULONG friendID);
+
+	// 聊天信息
+	void SingleMsg(SingleChatMsg *msg);
 
 	//数据库对象
-	SQLite sqliteQuery;
-	SQLite sqliteModify;
+	SQLite sqlite;
 	CRITICAL_SECTION csLock;
 	Server *server;
 };
